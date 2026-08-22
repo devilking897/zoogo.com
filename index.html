@@ -3,462 +3,359 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zoogo - Pakistani Bidding Marketplace</title>
+  <title>Zoogo - Buy & Sell</title>
   <style>
+    :root {
+      --primary-green: #2e7d32;
+      --light-green: #4caf50;
+      --yellow: #fbc02d;
+      --white: #ffffff;
+      --bg-gray: #f4f6f8;
+      --dark-text: #2c3e50;
+    }
+
     * {
       box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
 
-    /* Vibrant Gradient Navigation Bar */
+    body {
+      background-color: var(--bg-gray);
+      color: var(--dark-text);
+      min-height: 100vh;
+    }
+
     header {
-      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
-    }
-    .logo {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-    
-    /* Search Bar */
-    .search-bar {
-      flex: 1;
-      max-width: 450px;
-      display: flex;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      border-radius: 25px;
-      overflow: hidden;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 10px 18px;
-      border: none;
-      outline: none;
-      font-size: 0.95rem;
-    }
-    .search-bar button {
-      padding: 10px 22px;
-      border: none;
-      background: #8E2DE2;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .search-bar button:hover {
-      background: #4A00E0;
+      background-color: var(--primary-green);
+      padding: 1.5rem;
+      color: var(--white);
+      text-align: center;
     }
 
-    /* Navigation Buttons */
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--yellow);
+      letter-spacing: 1px;
+    }
+
     nav {
       display: flex;
-      gap: 12px;
+      justify-content: center;
+      gap: 1rem;
+      background-color: var(--white);
+      padding: 1rem;
+      border-bottom: 2px solid #e0e0e0;
     }
-    nav button {
-      background-color: rgba(255, 255, 255, 0.2);
-      border: 2px solid white;
-      color: white;
-      padding: 9px 18px;
-      border-radius: 20px;
-      cursor: pointer;
+
+    .nav-btn {
+      padding: 0.7rem 2rem;
+      border: 2px solid var(--primary-green);
+      border-radius: 6px;
+      font-size: 1rem;
       font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    nav button:hover, nav button.active {
-      background-color: white;
-      color: #11998e;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+      background-color: var(--white);
+      color: var(--primary-green);
+      transition: all 0.2s ease;
     }
 
-    /* Main Container */
-    .main-content {
+    .nav-btn.active {
+      background-color: var(--primary-green);
+      color: var(--white);
+    }
+
+    .container {
       max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .page {
-      display: none;
-    }
-    .page.active {
-      display: block;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
-    /* Sell Form styling */
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      border-top: 6px solid #11998e;
+    .search-container {
+      margin-bottom: 2rem;
     }
-    .card h2 {
-      margin-top: 0;
-      color: #11998e;
-    }
-    .form-group {
-      margin-bottom: 18px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #333;
-    }
-    .form-group input, .form-group select, .form-group textarea {
+
+    .search-box {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      transition: border-color 0.3s;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: #11998e;
+      padding: 0.9rem;
+      border: 2px solid var(--primary-green);
+      border-radius: 6px;
+      font-size: 1rem;
       outline: none;
+      background-color: var(--white);
     }
 
-    /* Listing Item Cards */
-    .item-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
     }
-    .item-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+
+    .card {
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid #f0f0f0;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .item-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    }
-    .item-image {
+
+    .card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background-color: #f0f0f0;
-    }
-    .category-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-      color: white;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.75rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-    .price-tag {
-      font-size: 1.25rem;
-      color: #11998e;
-      font-weight: 800;
-      margin: 12px 0;
-      background: #e8f8f5;
-      padding: 8px;
-      border-radius: 8px;
-      text-align: center;
+      background-color: #eee;
     }
 
-    /* Bidding Controls */
-    .bid-input-group {
+    .card-body {
+      padding: 1rem;
+      flex-grow: 1;
       display: flex;
-      gap: 8px;
-      margin-top: 10px;
+      flex-direction: column;
     }
-    .bid-input-group input {
-      flex: 1;
-      padding: 10px;
-      border: 2px solid #ddd;
+
+    .category-badge {
+      align-self: flex-start;
+      background-color: var(--yellow);
+      color: #333;
+      font-weight: bold;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-price {
+      font-size: 1.2rem;
+      color: var(--primary-green);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .form-container {
+      background: var(--white);
+      padding: 2rem;
       border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .form-container h2 {
+      color: var(--primary-green);
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.95rem;
       outline: none;
     }
-    .bid-input-group button {
-      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3);
-      transition: opacity 0.2s;
+
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      border-color: var(--primary-green);
     }
-    .bid-input-group button:hover {
-      opacity: 0.9;
-    }
-    .btn-submit {
+
+    .submit-btn {
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-      color: white;
+      background: var(--primary-green);
+      color: var(--white);
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.05rem;
+      padding: 0.85rem;
+      border-radius: 4px;
+      font-size: 1rem;
       font-weight: bold;
-      box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
-      transition: opacity 0.2s;
+      cursor: pointer;
     }
-    .btn-submit:hover {
-      opacity: 0.95;
+
+    .submit-btn:hover {
+      background: var(--light-green);
     }
-    .error-msg {
-      color: #ff3366;
-      font-size: 0.85rem;
-      margin-top: 6px;
-      font-weight: 600;
+
+    .hidden {
+      display: none;
     }
-    .history-list {
-      list-style-type: none;
-      padding: 0;
-      margin-top: 10px;
-      max-height: 100px;
-      overflow-y: auto;
-      border-top: 2px dashed #eee;
-      padding-top: 8px;
-    }
-    .history-list li {
-      padding: 4px 0;
-      font-size: 0.8rem;
+
+    .empty-message {
+      font-size: 1rem;
       color: #666;
-    }
-    .empty-msg {
-      grid-column: 1 / -1;
       text-align: center;
-      padding: 40px;
-      background: white;
-      border-radius: 16px;
-      color: #666;
+      grid-column: 1 / -1;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Colorful Header Navigation -->
   <header>
-    <div class="logo">🚀 Zoogo</div>
-    
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search items or categories..." onkeyup="filterItems()">
-      <button onclick="filterItems()">Search</button>
-    </div>
-
-    <!-- Page Buttons -->
-    <nav>
-      <button id="btn-browse" class="active" onclick="showPage('browse-page')">Browse Items</button>
-      <button id="btn-sell" onclick="showPage('sell-page')">+ Sell Item</button>
-    </nav>
+    <div class="logo">Zoogo</div>
   </header>
 
-  <div class="main-content">
+  <nav>
+    <button class="nav-btn active" id="buyTab" onclick="switchTab('buy')">Buy</button>
+    <button class="nav-btn" id="sellTab" onclick="switchTab('sell')">Sell</button>
+  </nav>
 
-    <!-- BROWSE ITEMS PAGE -->
-    <div id="browse-page" class="page active">
-      <h2 style="color: #2c3e50; margin-bottom: 20px;">🔥 Live Bidding Feed</h2>
-      <div id="item-grid" class="item-grid">
-        <!-- Dynamic Cards Inserted Here -->
+  <div class="container">
+    <!-- BUY SECTION -->
+    <section id="buySection">
+      <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search items..." onkeyup="filterItems()">
       </div>
-    </div>
+      <div class="grid" id="itemsGrid"></div>
+    </section>
 
-    <!-- SELL ITEM PAGE -->
-    <div id="sell-page" class="page">
-      <div class="card">
-        <h2>✨ List an Item on Zoogo</h2>
-        <form id="sell-form" onsubmit="createNewListing(event)">
-          
+    <!-- SELL SECTION -->
+    <section id="sellSection" class="hidden">
+      <div class="form-container">
+        <h2>Sell an Item</h2>
+        <form id="sellForm" onsubmit="handleSell(event)">
           <div class="form-group">
-            <label for="item-title">Item Title</label>
-            <input type="text" id="item-title" placeholder="e.g. iPhone 13 Pro" required>
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" required>
           </div>
 
           <div class="form-group">
-            <label for="item-type">Category</label>
-            <select id="item-type" required>
-              <option value="">Choose a Category...</option>
+            <label for="itemPrice">Price (Rs.)</label>
+            <input type="number" id="itemPrice" required>
+          </div>
+
+          <div class="form-group">
+            <label for="itemCategory">Category</label>
+            <select id="itemCategory" required>
+              <option value="">Select Category</option>
               <option value="Electronics">Electronics</option>
-              <option value="Collectibles">Collectibles</option>
-              <option value="Fashion">Fashion</option>
               <option value="Vehicles">Vehicles</option>
-              <option value="Other">Other</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Home">Home</option>
+              <option value="Sports">Sports</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="item-price">Starting Price (PKR)</label>
-            <input type="number" id="item-price" min="1" step="1" placeholder="50000" required>
+            <label for="itemImage">Image URL</label>
+            <input type="url" id="itemImage" required placeholder="https://example.com/image.jpg">
           </div>
 
           <div class="form-group">
-            <label for="item-img">Item Image</label>
-            <input type="file" id="item-img" accept="image/*">
+            <label for="itemDescription">Description</label>
+            <textarea id="itemDescription" rows="4" required></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="item-desc">Item Description</label>
-            <textarea id="item-desc" rows="4" placeholder="Describe condition, features, history..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit">Publish Listing</button>
+          <button type="submit" class="submit-btn">Post Item</button>
         </form>
       </div>
-    </div>
-
+    </section>
   </div>
 
-<script>
-  let listings = []; // Completely empty start - default items removed
+  <script>
+    const items = [];
 
-  function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-
-    document.getElementById(pageId).classList.add('active');
-    if (pageId === 'browse-page') {
-      document.getElementById('btn-browse').classList.add('active');
-    } else {
-      document.getElementById('btn-sell').classList.add('active');
-    }
-  }
-
-  function renderListings(itemsToRender) {
-    const grid = document.getElementById('item-grid');
-    grid.innerHTML = '';
-
-    if (itemsToRender.length === 0) {
-      grid.innerHTML = '<div class="empty-msg"><h3>No items listed yet!</h3><p>Click "+ Sell Item" above to create the first listing on Zoogo.</p></div>';
-      return;
-    }
-
-    itemsToRender.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'item-card';
+    function renderItems(itemList) {
+      const grid = document.getElementById('itemsGrid');
+      grid.innerHTML = '';
       
-      let historyItems = item.history.map(h => `<li>${h}</li>`).join('');
-      let imageHtml = item.image ? `<img src="${item.image}" class="item-image" alt="${item.title}">` : '';
+      if (itemList.length === 0) {
+        grid.innerHTML = '<div class="empty-message">No items listed yet. Use the Sell tab to add an item.</div>';
+        return;
+      }
 
-      card.innerHTML = `
-        <div>
-          ${imageHtml}
-          <span class="category-badge">${item.category}</span>
-          <h3 style="margin: 5px 0; color: #2c3e50;">${item.title}</h3>
-          <p style="font-size: 0.9rem; color: #666;">${item.description}</p>
-          <div class="price-tag">Current Price: PKR ${item.currentBid.toLocaleString()}</div>
-        </div>
-
-        <div>
-          <div class="bid-input-group">
-            <input type="number" id="bid-input-${item.id}" placeholder="Enter > PKR ${item.currentBid}" min="${item.currentBid + 1}">
-            <button onclick="placeBid(${item.id})">Bid Now</button>
+      itemList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/250x180?text=No+Image'">
+          <div class="card-body">
+            <span class="category-badge">${item.category}</span>
+            <div class="card-title">${item.name}</div>
+            <div class="card-price">Rs. ${Number(item.price).toLocaleString()}</div>
+            <div class="card-desc">${item.description}</div>
           </div>
-          <div id="error-${item.id}" class="error-msg"></div>
+        `;
+        grid.appendChild(card);
+      });
+    }
 
-          <h4 style="margin: 12px 0 4px 0; font-size: 0.85rem; color: #444;">Activity Log:</h4>
-          <ul id="history-${item.id}" class="history-list">
-            ${historyItems}
-          </ul>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
+    function switchTab(tab) {
+      const buySection = document.getElementById('buySection');
+      const sellSection = document.getElementById('sellSection');
+      const buyTab = document.getElementById('buyTab');
+      const sellTab = document.getElementById('sellTab');
 
-  function createNewListing(event) {
-    event.preventDefault();
+      if (tab === 'buy') {
+        buySection.classList.remove('hidden');
+        sellSection.classList.add('hidden');
+        buyTab.classList.add('active');
+        sellTab.classList.remove('active');
+      } else {
+        sellSection.classList.remove('hidden');
+        buySection.classList.add('hidden');
+        sellTab.classList.add('active');
+        buyTab.classList.remove('active');
+      }
+    }
 
-    const title = document.getElementById('item-title').value;
-    const category = document.getElementById('item-type').value;
-    const price = parseFloat(document.getElementById('item-price').value);
-    const description = document.getElementById('item-desc').value;
-    const imageInput = document.getElementById('item-img');
+    function filterItems() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = items.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.category.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+      );
+      renderItems(filtered);
+    }
 
-    let imageSrc = '';
+    function handleSell(event) {
+      event.preventDefault();
 
-    const processListing = (imgData) => {
-      const newListing = {
+      const newItem = {
         id: Date.now(),
-        title: title,
-        category: category,
-        description: description,
-        currentBid: price,
-        image: imgData,
-        history: [`Starting price set at PKR ${price.toLocaleString()}`]
+        name: document.getElementById('itemName').value,
+        price: document.getElementById('itemPrice').value,
+        category: document.getElementById('itemCategory').value,
+        image: document.getElementById('itemImage').value,
+        description: document.getElementById('itemDescription').value
       };
 
-      listings.unshift(newListing);
-      document.getElementById('sell-form').reset();
-      renderListings(listings);
-      showPage('browse-page');
-    };
-
-    if (imageInput.files && imageInput.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        processListing(e.target.result);
-      };
-      reader.readAsDataURL(imageInput.files[0]);
-    } else {
-      processListing('');
-    }
-  }
-
-  function placeBid(itemId) {
-    const item = listings.find(i => i.id === itemId);
-    const input = document.getElementById(`bid-input-${itemId}`);
-    const error = document.getElementById(`error-${itemId}`);
-    const bidVal = parseFloat(input.value);
-
-    if (isNaN(bidVal) || bidVal <= item.currentBid) {
-      error.textContent = `Your bid must be higher than PKR ${item.currentBid.toLocaleString()}`;
-      return;
+      items.unshift(newItem);
+      renderItems(items);
+      document.getElementById('sellForm').reset();
+      switchTab('buy');
     }
 
-    error.textContent = '';
-    item.currentBid = bidVal;
-    
-    const timestamp = new Date().toLocaleTimeString();
-    item.history.unshift(`Bid of PKR ${bidVal.toLocaleString()} placed at ${timestamp}`);
-
-    renderListings(listings);
-  }
-
-  function filterItems() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const filtered = listings.filter(item => 
-      item.title.toLowerCase().includes(query) || 
-      item.category.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query)
-    );
-    renderListings(filtered);
-  }
-
-  renderListings(listings);
-</script>
-
+    renderItems(items);
+  </script>
 </body>
 </html>
